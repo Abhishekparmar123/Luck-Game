@@ -43,7 +43,7 @@
                     player2Round = player2Round + Math.floor(Math.random() * 5);
                 }
 
-                if (player1Round >= 100) {
+                if (player1Round >= 100 && player2Score < 3) {
                     player1Score += 1;
                     if (player1Score >= 3) {
                         console.log(player1 + "hello")
@@ -52,7 +52,7 @@
                         reset = true;
                     }
                 }
-                if (player2Round >= 100) {
+                if (player2Round >= 100 && player1Score<3) {
                     player2Score += 1;
                     if (player2Score >= 3) {
                         result.innerHTML = "Player2 won the match !";
