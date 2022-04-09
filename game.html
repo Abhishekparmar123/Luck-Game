@@ -2,101 +2,80 @@
 <html>
 
 <head>
-	<title>
-		Task Solution for Javascript Developer in Inkoop 
-	</title>
+    <title>
+        Task Solution for Javascript Developer in Inkoop
+    </title>
 </head>
 
 <body style="text-align:center;">
-	<h1 style="color: green">
-		Task Solution for Javascript Developer in Inkoop 
-	</h1>
-	<p id="INP_UP"></p>
-	<button onclick="inp_Run()">
-		Click Here
+    <h1 style="color: green">
+        Task Solution for Javascript Developer in Inkoop
+    </h1>
+    <p id="INP_UP"></p>
+    <button id="startButton" onclick="start()">
+		Start Game
 	</button>
-	<p id="INP_DOWN12"></p>
-	<p id="INP_DOWN13"></p>
-	<p id="INP_DOWN14"></p>
-	
+    <p id="player1">Player 1 - Won : 0</p>
+    <p id="player2">Player 2 - Won : 0</p>
+    <p id="result"></p>
 
-	<script>
-		var el_up = document.getElementById("INP_UP");
-		var el_down = document.getElementById("INP_DOWN12");
-		var el_down1 = document.getElementById("INP_DOWN13");
-		var el_down2 = document.getElementById("INP_DOWN14");
-		el_up.innerHTML =
-		"Click on the button and start the game";
-		var data = [];
-		var data1 = [];
-		function inp_Run() {
-			
-			if (data.length <=4){
-			
-			var el_down12 = Array.from({
-				length: 1
-			}, () => Math.floor(Math.random() * 5));
-			
-			el_down.innerHTML ="Player 1 - Won : "+ el_down12;
-			var el_down13 = Array.from({
-				length: 1
-			}, () => Math.floor(Math.random() * 5));
 
-			el_down1.innerHTML = "Player 2 - Won : "+el_down13;
-			data.push(el_down12);
-			data1.push(el_down13);
-			if (data.length == 3){
-					total = 0;
-					for (var i in data) {
-						total = total+Number(data[i]);
+    <script>
+        var player1 = document.getElementById("player1");
+        var player2 = document.getElementById("player2");
+        var result = document.getElementById("result");
+        var startButton = document.getElementById("startButton");
 
-					}
-					if (total ==0){
-							el_down2.innerHTML = "Player 2 Won"; 
-							}
-					}
+        var reset = false;
 
-			if (data1.length == 3){
-					total = 0;
-					for (var i in data1) {
-						total = total+Number(data1[i]);
+        var player1Score = 0;
+        var player2Score = 0;
 
-					}
-					if (total == 0){
-							el_down2.innerHTML = "Player 1 Won"; 
-							}
-					}
+        // el_down.innerHTML = "Player 1 - Won : " + el_down12;
 
-			if(data.length == 5){
-					total_data = 0;
-					for (var i in data) {
-						total_data = total_data+Number(data[i]);
+        function start() {
+            if (reset === false) {
+                var player1Round = 0;
+                var player2Round = 0;
 
-					}
-					
-					total_data1 = 0;
-					for (var i in data1) {
-						total_data1 = total_data1+Number(data1[i]);
+                while (player1Round <= 100 && player2Round <= 100) {
+                    player1Round = player1Round + Math.floor(Math.random() * 5);
+                    player2Round = player2Round + Math.floor(Math.random() * 5);
+                }
 
-					}
-					
-					if(total_data > total_data1){
-								el_down2.innerHTML = "Player 1 Won The Match";	
-								}
-					if(total_data < total_data1){
-								el_down2.innerHTML = "Player 2 Won The Match";	
-								}
-					if(total_data == total_data1){
-								el_down2.innerHTML = "Both Player Score are same so please restart this game.";	
-								}
-					
-		
-			}
-			
-		} 
+                if (player1Round >= 100) {
+                    player1Score += 1;
+                    if (player1Score >= 3) {
+                        console.log(player1 + "hello")
+                        result.innerHTML = "Player1 won the match !";
+                        startButton.innerHTML = "Reset";
+                        reset = true;
+                    }
+                }
+                if (player2Round >= 100) {
+                    player2Score += 1;
+                    if (player2Score >= 3) {
+                        result.innerHTML = "Player2 won the match !";
+                        startButton.innerHTML = "Reset";
+                        reset = true;
+                    }
+                }
 
-		}
-	</script>
+                player1.innerHTML = "Player 1 - Won : " + player1Score;
+                player2.innerHTML = "Player 2 - Won : " + player2Score;
+
+                console.log(player1Round, player2Round);
+            } else {
+                player1Score = 0;
+                player2Score = 0;
+                reset = false;
+                player1.innerHTML = "Player 1 - Won : " + player1Score;
+                player2.innerHTML = "Player 2 - Won : " + player2Score;
+                startButton.innerHTML = "Start Game";
+                result.innerHTML = "";
+            }
+        }
+    </script>
 </body>
 
 </html>
