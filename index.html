@@ -28,8 +28,25 @@
 
         var reset = false;
 
-        var player1Score = 0;
-        var player2Score = 0;
+        var player1Score = parseInt(localStorage.getItem("player1"));
+        var player2Score = parseInt(localStorage.getItem("player2"));
+
+        player1.innerHTML = "Player 1 - Won : " + (isNaN(player1Score) ? 0 : player1Score);
+        player2.innerHTML = "Player 2 - Won : " + (isNaN(player2Score) ? 0 : player2Score);
+
+        if (player1Score >= 3) {
+            result.innerHTML = "Player1 won the match !";
+            reset = true;
+            startButton.innerHTML = "Reset";
+        } else if (player2Score >= 3) {
+            result.innerHTML = "Player2 won the match !";
+            reset = true;
+            startButton.innerHTML = "Reset";
+
+        }
+
+        alert(isNaN(parseInt(localStorage.getItem("player1"))));
+        // alert(parseInt(localStorage.getItem("player1")));
 
         // el_down.innerHTML = "Player 1 - Won : " + el_down12;
 
@@ -45,6 +62,8 @@
 
                 if (player1Round >= 100 && player2Score < 3) {
                     player1Score += 1;
+                    localStorage.setItem("player1", player1Score);
+                    // alert(localStorage.getItem("player1"));
                     if (player1Score >= 3) {
                         console.log(player1 + "hello")
                         result.innerHTML = "Player1 won the match !";
@@ -52,8 +71,9 @@
                         reset = true;
                     }
                 }
-                if (player2Round >= 100 && player1Score<3) {
+                if (player2Round >= 100 && player1Score < 3) {
                     player2Score += 1;
+                    localStorage.setItem("player2", player2Score);
                     if (player2Score >= 3) {
                         result.innerHTML = "Player2 won the match !";
                         startButton.innerHTML = "Reset";
@@ -73,6 +93,9 @@
                 player2.innerHTML = "Player 2 - Won : " + player2Score;
                 startButton.innerHTML = "Start Game";
                 result.innerHTML = "";
+                localStorage.setItem("player1", 0);
+                localStorage.setItem("player2", 0);
+
             }
         }
     </script>
