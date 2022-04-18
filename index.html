@@ -28,6 +28,9 @@
 
         var reset = false;
 
+        localStorage.setItem("player1", ((localStorage.getItem("player1") == null) ? 0 : localStorage.getItem("player1")));
+        localStorage.setItem("player2", ((localStorage.getItem("player2") == null) ? 0 : localStorage.getItem("player2")));
+
         var player1Score = parseInt(localStorage.getItem("player1"));
         var player2Score = parseInt(localStorage.getItem("player2"));
 
@@ -46,7 +49,7 @@
         }
 
         alert(isNaN(parseInt(localStorage.getItem("player1"))));
-        // alert(parseInt(localStorage.getItem("player1")));
+        alert(localStorage.getItem("player1"));
 
         // el_down.innerHTML = "Player 1 - Won : " + el_down12;
 
